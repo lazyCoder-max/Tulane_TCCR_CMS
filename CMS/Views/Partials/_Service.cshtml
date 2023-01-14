@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Service>>
+@{
+    var services = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+}
+@if (services.Count() >= 1)
+{
+    <!-- service-section -->
+    <section class="service-section alternat-2">
+        <div class="pattern-layer">
+            <div class="pattern-3" style="background-image:url(assets/images/shape/shape-55.png);"></div>
+            <div class="pattern-1 wow zoomIn animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="background-image: url(assets/images/shape/shape-3.png);"></div>
+            <div class="pattern-2  wow zoomIn animated" data-wow-delay="300ms" data-wow-duration="1500ms" style="background-image: url(assets/images/shape/shape-4.png);"></div>
+        </div>
+        <div class="auto-container">
+            <div class="sec-title centred">
+                <h6>ARO Services</h6>
+            </div>
+            <div class="row clearfix">
+                @foreach (var service in services.Where(x => x.IsVisible()).Take(10))
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 service-block">
+                        <div class="service-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <div class="icon-box"><i class="icon-5"></i></div>
+                                <h4>@service.Header</h4>
+                                <p>@service.ShortDescription</p>
+                                @if (service.Description.ToString().Length >= 1)
+                                {
+                                    <div class="btn-box"><a href="@service.Parent.Url()" class="theme-btn-two">Read More</a></div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+        </div>
+        
+    </section>
+    <div class="d-flex justify-content-center">
+        <a href="@services.Single().Parent.Url()" class="theme-btn-one mx-auto">Discover More</a>
+    </div>
+   <br />
+    <!-- service-section end -->
+}
+

@@ -1,0 +1,43 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Staff>>
+@{
+    var teams = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+}
+<!-- team-section -->
+<section class="team-section home-5">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <h6>Our Staff</h6>
+            <h2>Focusing Your Mind, with The <br />Best Expert.</h2>
+        </div>
+        <div class="row clearfix">
+            @foreach (var team in teams.Where(x => x.IsVisible()).Take(10))
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12 team-block">
+                    <div class="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <figure class="image-box">
+                                @if(team.Photo== null)
+                                {
+                                    <img src="assets/images/team/team-2.jpg" alt="">
+                                }
+                                else
+                                {
+                                    <img src="@team.Photo.Content.Url()" alt="">
+                                }
+
+                                <ul class="social-style-one clearfix">
+                                </ul>
+                            </figure>
+                            <div class="lower-content">
+                                <h4><a href="team-details.html">@team.PersonsName</a></h4>
+                                <span class="designation">@team.Role</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<br/>
+<!-- team-section end -->
