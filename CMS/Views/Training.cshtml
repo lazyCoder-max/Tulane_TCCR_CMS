@@ -2,8 +2,8 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = "InnerPage.cshtml";
-    var coordinatorTraining = Model.Root()?.Descendant<CoordinatorTraining>()?.Children?.SingleOrDefault()?.Descendants<Training>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).ToList();
-    var investigatorTraining = Model.Root()?.Descendant<InvestigatorTraining>()?.Children?.SingleOrDefault()?.Descendants<Training>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).ToList();
+    var coordinatorTraining = Model.Root()?.Descendant<CoordinatorTraining>()?.Children.Cast<Training>().ToList();
+    var investigatorTraining = Model.Root()?.Descendant<InvestigatorTraining>()?.Children.Cast<Training>().ToList();
 }
 <!-- Page Title -->
 <section class="page-title centred" style="background-image: url(../../assets/images/background/page-title.jpg);">
@@ -11,7 +11,7 @@
         <div class="content-box">
             <div class="shape"></div>
             <div class="title">
-                <h1>Training</h1>
+                <h1>Training </h1>
             </div>
             <ul class="bread-crumb clearfix">
                 <li><a href="index.html">Home</a></li>
@@ -39,16 +39,16 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 event-block">
                         <div class="event-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                             <div class="inner-box">
-                                <div class="post-date"><h3>@training.StartDateAndTime.Day <span>@training.StartDateAndTime.Month.ToString("MMM")</span></h3></div>
+                                <div class="post-date"><h3>@training.StartDateAndTime.Day <span>@training.StartDateAndTime.ToString("MMM")</span></h3></div>
                                 <h4><a href="@training.Url()">@training.Title</a></h4>
                                 <ul class="info clearfix">
                                     @if (training.Location != null)
                                     {
                                         <li><i class="icon-21"></i>@training.Location</li>
                                     }
-                                    <li><i class="icon-22"></i>@training.StartDateAndTime - @training.EndDate</li>
+                                    <li><i class="icon-22"></i>@training.StartDateAndTime.ToShortDateString() - @training.EndDate.ToShortDateString()</li>
                                 </ul>
-                                <p>@training.Description</p>
+                                <p>@training.ShortDescription</p>
                             </div>
                         </div>
                     </div>
@@ -79,16 +79,16 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 event-block">
                         <div class="event-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                             <div class="inner-box">
-                                <div class="post-date"><h3>@training.StartDateAndTime.Day <span>@training.StartDateAndTime.Month.ToString("MMM")</span></h3></div>
+                                <div class="post-date"><h3>@training.StartDateAndTime.Day <span>@training.StartDateAndTime.ToString("MMM")</span></h3></div>
                                 <h4><a href="@training.Url()">@training.Title</a></h4>
                                 <ul class="info clearfix">
                                     @if (training.Location != null)
                                     {
                                         <li><i class="icon-21"></i>@training.Location</li>
                                     }
-                                    <li><i class="icon-22"></i>@training.StartDateAndTime - @training.EndDate</li>
+                                    <li><i class="icon-22"></i>@training.StartDateAndTime.ToShortDateString() - @training.EndDate.ToShortDateString()</li>
                                 </ul>
-                                <p>@training.Description</p>
+                                <p>@training.ShortDescription</p>
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,70 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "InnerPage.cshtml";
+    var training = Model.Root().Descendant<Training>();
+}
+<!-- Page Title -->
+<section class="page-title centred" style="background-image: url(../../../assets/images/background/page-title.jpg);">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="shape"></div>
+            <div class="title">
+                <h1>Training</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a href="index.html">Home</a></li>
+                <li>Training</li>
+                <li>@training.Name</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- about-section -->
+<section class="about-section sec-pad-2">
+    <div class="auto-container">
+        <div class="row align-items-center clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div class="content_block_1">
+                    <div class="content-box">
+                        <div class="sec-title">
+                            <h6>Training</h6>
+                            <h2>@training.Title</h2>
+                        </div>
+                        <div class="bold-text">
+                            <p>@training.ShortDescription</p>
+                        </div>
+                        <div class="text">
+                            <div class="text">
+                                <p>@training.Description</p>
+                                <ul class="list-style-one clearfix">
+                                    @if (training.Location != null)
+                                    {
+                                        <li><i class="icon-21"></i>@training.Location</li>
+                                    }
+                                    <li><i class="icon-22"></i>@training.StartDateAndTime.ToShortDateString() - @training.EndDate.ToShortDateString()</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                <div class="image_block_1">
+                    <div class="image-box">
+                        <div class="shape">
+                            <div class="shape-1" style="background-image: url(../../../assets/images/shape/shape-5.png);"></div>
+                            <div class="shape-2" style="background-image: url(../../../assets/images/shape/shape-2.png);"></div>
+                        </div>
+                        <figure class="image"><img src="../../../assets/images/resource/about-1.png" alt=""></figure>
+                        <div class="text">
+                            <h2>@training.StartDateAndTime.Day </h2>
+                            <h5>@training.StartDateAndTime.ToString("MMM")</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-section end -->
