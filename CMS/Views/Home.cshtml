@@ -2,4 +2,31 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
 	Layout = "Master.cshtml";
+    var services = Model.Root().Descendants<Service>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var teams = Model.Root().Descendants<Staff>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).Take(10);
 }
+@Html.Partial("~/Views/Partials/_Banner.cshtml")
+@Html.Partial("~/Views/Partials/_Service.cshtml",services)
+@Html.Partial("~/Views/Partials/_AcadamicResearch.cshtml")
+@Html.Partial("~/Views/Partials/_Teams.cshtml",teams)
+<!-- cta-style-two -->
+<section class="cta-style-two bg-color-4">
+    <div class="pattern-layer">
+        <div class="pattern-1" style="background-image: url(assets/images/shape/shape-61.png);"></div>
+        <div class="pattern-2" style="background-image: url(assets/images/shape/shape-62.png);"></div>
+    </div>
+    <div class="auto-container">
+        <div class="inner-box clearfix">
+            <div class="text pull-left">
+                <h2>Serve the public<br />with your experience</h2>
+            </div>
+            <div class="btn-box pull-right">
+                <a href="index-4.html" class="banner-btn-two">Voulenteer Research</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Scroll to top-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="fal fa-angle-up"></span>
+</button>

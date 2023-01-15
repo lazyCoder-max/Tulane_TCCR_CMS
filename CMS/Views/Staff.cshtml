@@ -1,5 +1,58 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "Master.cshtml";
+    Layout = "InnerPage.cshtml";
+    var teams = Model.Root().Descendants<Staff>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var staffs = teams.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
 }
+<!-- Page Title -->
+<section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="shape"></div>
+            <div class="title">
+                <h1>Our Staff</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a href="index.html">Home</a></li>
+                <li>Our Staff</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- team-style-three -->
+<section class="team-style-three centred">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <h6>Team Member</h6>
+            <h2>Focusing Your Mind, with The <br />Best Expert.</h2>
+        </div>
+        <div class="row clearfix">
+            @foreach (var staff in teams)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 team-block">
+                    <div class="team-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            @if (staff.Photo == null)
+                            {
+                                <figure class="image-box"><img src="assets/images/team/team-9.jpg" alt=""></figure>
+                            }
+                            else
+                            {
+                                <figure class="image-box"><img src="@staff.Photo.Content.Url()" alt=""></figure>
+                            }
+                            <div class="lower-content">
+                                <div class="inner">
+                                    <h4><a href="@staff.Url()">@staff.PersonsName</a></h4>
+                                    <span class="designation">@staff.Role</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- team-style-three end -->
+<br />

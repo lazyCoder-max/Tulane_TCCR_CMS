@@ -18,9 +18,48 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
+	// Mixin Content Type with alias "staff"
+	/// <summary>Staff</summary>
+	public partial interface IStaff : IPublishedContent
+	{
+		/// <summary>Address</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string Address { get; }
+
+		/// <summary>Biography</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string Biography { get; }
+
+		/// <summary>Email</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string Email { get; }
+
+		/// <summary>Persons Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string PersonsName { get; }
+
+		/// <summary>Phone Number</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		int PhoneNumber { get; }
+
+		/// <summary>Photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		global::Umbraco.Cms.Core.Models.MediaWithCrops Photo { get; }
+
+		/// <summary>Designation</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string Role { get; }
+	}
+
 	/// <summary>Staff</summary>
 	[PublishedModel("staff")]
-	public partial class Staff : PublishedContentModel
+	public partial class Staff : PublishedContentModel, IStaff
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -55,7 +94,25 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("address")]
-		public virtual string Address => this.Value<string>(_publishedValueFallback, "address");
+		public virtual string Address => GetAddress(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Address</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetAddress(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "address");
+
+		///<summary>
+		/// Biography
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("biography")]
+		public virtual string Biography => GetBiography(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Biography</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetBiography(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "biography");
 
 		///<summary>
 		/// Email: Email Address
@@ -63,7 +120,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("email")]
-		public virtual string Email => this.Value<string>(_publishedValueFallback, "email");
+		public virtual string Email => GetEmail(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Email</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetEmail(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "email");
 
 		///<summary>
 		/// Persons Name: Name of the Staff
@@ -71,14 +133,23 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("personsName")]
-		public virtual string PersonsName => this.Value<string>(_publishedValueFallback, "personsName");
+		public virtual string PersonsName => GetPersonsName(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Persons Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetPersonsName(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "personsName");
 
 		///<summary>
 		/// Phone Number
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[ImplementPropertyType("phoneNumber")]
-		public virtual int PhoneNumber => this.Value<int>(_publishedValueFallback, "phoneNumber");
+		public virtual int PhoneNumber => GetPhoneNumber(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Phone Number</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		public static int GetPhoneNumber(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<int>(publishedValueFallback, "phoneNumber");
 
 		///<summary>
 		/// Photo
@@ -86,7 +157,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("photo")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Photo => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "photo");
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Photo => GetPhoto(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Photo</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetPhoto(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "photo");
 
 		///<summary>
 		/// Designation: Enter the staff's role
@@ -94,6 +170,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("role")]
-		public virtual string Role => this.Value<string>(_publishedValueFallback, "role");
+		public virtual string Role => GetRole(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Designation</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "10.3.2+e7fae14")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetRole(IStaff that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "role");
 	}
 }
