@@ -2,6 +2,10 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = "InnerPage.cshtml";
+    var about = Model.Root().Descendant<About>();
+    var services = Model.Root().Descendants<FacilityService>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).ToList();
+    int counter = 1;
+    var images = @about.Image.ToList();
 }
 <!-- Page Title -->
 <section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
@@ -30,8 +34,8 @@
                             <div class="shape-4" style="background-image: url(../../assets/images/shape/shape-40.png);"></div>
                             <div class="shape-5" style="background-image: url(../../assets/images/shape/shape-41.png);"></div>
                         </div>
-                        <figure class="image image-1 paroller"><img src="../../assets/images/resource/about-1.jpg" alt=""></figure>
-                        <figure class="image image-2 paroller-2"><img src="../../assets/images/resource/about-2.jpg" alt=""></figure>
+                        <figure class="image image-1 paroller"><img src="@images[0].Url()" alt=""></figure>
+                        <figure class="image image-2 paroller-2"><img src="@images[1].Url()" alt=""></figure>
                     </div>
                 </div>
             </div>
@@ -40,32 +44,33 @@
                     <div class="content-box ml-70">
                         <div class="sec-title">
                             <h6>About Research</h6>
-                            <h2>Reliable Agroscience & Soil Analysis Research.</h2>
+                            <h2>@about.AboutTitle</h2>
                         </div>
                         <div class="bold-text">
-                            <p>Excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum. sed  spiciatis unde omnis natus error Inventore.</p>
+                            <p>@about.ShortDescription</p>
                         </div>
-                        <div class="text">
-                            <p>quasi architebeat vitae dicta sunt explicabo nemo enim ipsam voluptatem quia voluptassit.</p>
-                        </div>
-                        <div class="singl-block centred">
-                            <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12 single-column">
-                                    <div class="single-item">
-                                        <div class="icon-box"><i class="icon-36"></i></div>
-                                        <h4>Medical Research</h4>
-                                        <p>Excepteur sint ocecat pro dent sunt in culpa qui.</p>
+                        @if (services.Count>=2)
+                        {
+                            <div class="singl-block centred">
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 single-column">
+                                        <div class="single-item">
+                                            <div class="icon-box"><i class="icon-36"></i></div>
+                                            <h4>@services[0].Title</h4>
+                                            <p>@services[0].ShortDescription</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 single-column">
-                                    <div class="single-item">
-                                        <div class="icon-box"><i class="icon-37"></i></div>
-                                        <h4>Blood Resources</h4>
-                                        <p>Excepteur sint ocecat pro dent sunt in culpa qui.</p>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 single-column">
+                                        <div class="single-item">
+                                            <div class="icon-box"><i class="icon-37"></i></div>
+                                            <h4>@services[1].Title</h4>
+                                            <p>@services[1].ShortDescription</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        
                     </div>
                 </div>
             </div>
@@ -81,64 +86,33 @@
     </div>
     <div class="auto-container">
         <div class="sec-title centred">
-            <h6>Research Topic</h6>
-            <h2>Medical, Medicine and Health <br />Science Topic</h2>
+            <h6>About Us</h6>
+            <h2>What can our facility do for patients and researchers?</h2>
         </div>
         <div class="inner-content">
             <div class="shape" style="background-image: url(assets/images/shape/shape-64.png);"></div>
             <div class="row clearfix">
-                <div class="col-lg-3 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <figure class="image-box">
-                                <img src="assets/images/resource/research-1.png" alt="">
-                                <h5>01</h5>
-                            </figure>
-                            <div class="text">
-                                <h4>Contact To <br />Test</h4>
+                @foreach (var service in services)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 research-block">
+                        <div class="research-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <figure class="image-box">
+                                    <img src="@service.Image.Url()" alt="">
+                                    <h5>@counter</h5>
+                                </figure>
+                                <div class="text">
+                                    <h4>@service.Title</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-two wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <figure class="image-box">
-                                <img src="assets/images/resource/research-2.png" alt="">
-                                <h5>02</h5>
-                            </figure>
-                            <div class="text">
-                                <h4>Lab Generates <br />Proposal</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-two wow fadeInUp animated" data-wow-delay="400ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <figure class="image-box">
-                                <img src="assets/images/resource/research-3.png" alt="">
-                                <h5>03</h5>
-                            </figure>
-                            <div class="text">
-                                <h4>Get Clean & <br />Fresh</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 research-block">
-                    <div class="research-block-two wow fadeInUp animated" data-wow-delay="600ms" data-wow-duration="1500ms">
-                        <div class="inner-box">
-                            <figure class="image-box">
-                                <img src="assets/images/resource/research-4.png" alt="">
-                                <h5>04</h5>
-                            </figure>
-                            <div class="text">
-                                <h4>Enjoy Our <br />Service</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                    {
+                        counter += 1;
+                    }
+                }
+
             </div>
         </div>
     </div>

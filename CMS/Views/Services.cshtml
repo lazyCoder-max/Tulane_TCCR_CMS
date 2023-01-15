@@ -1,0 +1,65 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "InnerPage.cshtml";
+    var services = Model.Root().Descendants<Service>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).ToList();
+    
+}
+<!-- Page Title -->
+<section class="page-title centred" style="background-image: url(../../assets/images/background/page-title.jpg);">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="shape"></div>
+            <div class="title">
+                <h1>Services</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a href="index.html">Home</a></li>
+                <li>Services</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- about-style-four -->
+<!-- service-style-two -->
+<section class="service-style-two sec-pad centred">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <h6>Facilities and Services</h6>
+            <h2>Explore Our Main Services.</h2>
+        </div>
+        <div class="row clearfix">
+            @foreach (var service in services)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-two wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            @if (service.Image!=null)
+                            {
+                                {
+                                    var serviceImages = @service.Image.ToList();
+                                    <figure class="image-box"><img src="@serviceImages[0].Url()" alt=""></figure>
+                                }
+                                
+                            }
+                            else
+                            {
+                                <figure class="image-box"><img src="../../assets/images/service/service-1.jpg" alt=""></figure>
+                            }
+                            <div class="lower-content">
+                                <div class="icon-box"><i class="icon-39"></i></div>
+                                <h4><a href="@service.Url()">@service.Header</a></h4>
+                                <p>@service.ShortDescription</p>
+                                <div class="btn-box"><a href="@service.Url()" class="theme-btn-two">Read More</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="more-btn">
+            <a href="index-2.html" class="theme-btn-one">More Services</a>
+        </div>
+    </div>
+</section>
+<!-- service-style-two end -->

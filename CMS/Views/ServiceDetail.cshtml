@@ -1,0 +1,58 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "InnerPage.cshtml";
+    var service = Model.Root().Descendant<Service>();
+    var serviceImages = @service.Image.ToList();
+}
+<!-- Page Title -->
+<section class="page-title centred" style="background-image: url(../../assets/images/background/page-title.jpg);">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="shape"></div>
+            <div class="title">
+                <h1>Services</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a href="index.html">Home</a></li>
+                <li>Services</li>
+                <li>@service.Name</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- about-section -->
+<section class="about-section sec-pad-2">
+    <div class="auto-container">
+        <div class="row align-items-center clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div class="content_block_1">
+                    <div class="content-box">
+                        <div class="sec-title">
+                            <h6>Service</h6>
+                            <h2>@service.Header</h2>
+                        </div>
+                        <div class="bold-text">
+                            <p>@service.ShortDescription</p>
+                        </div>
+                        <div class="text">
+                            <p>@service.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                <div class="image_block_1">
+                    <div class="image-box">
+                        <div class="shape">
+                            <div class="shape-1" style="background-image: url(../../assets/images/shape/shape-5.png);"></div>
+                            <div class="shape-2" style="background-image: url(../../assets/images/shape/shape-2.png);"></div>
+                        </div>
+                        <figure class="image"><img src="@serviceImages[1].Url()" alt=""></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-section end -->
