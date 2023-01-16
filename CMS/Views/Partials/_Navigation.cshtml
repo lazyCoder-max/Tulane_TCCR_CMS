@@ -1,4 +1,7 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Resource>>
+@{
+    var resources = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+}
 <!-- main header -->
 <header class="main-header style-four style-five">
     <!-- header-lower -->
@@ -37,14 +40,12 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="index.html">Resources</a>
+                                <a href="#">Resources</a>
                                 <ul>
-                                    <li><a href="about.html">Assistance with IRB</a></li>
-                                    <li><a href="research.html">Clinical Trials Finance</a></li>
-                                    <li><a href="books.html">Clinicaltrials.gov</a></li>
-                                    <li><a href="journal-article.html">Coordinators</a></li>
-                                    <li><a href="future-member.html">Investigators</a></li>
-                                    <li><a href="testimonial.html">Visitors</a></li>
+                                    @foreach(var resource in resources)
+                                    {
+                                        <li><a href="@resource.Url()">@resource.Name</a></li>
+                                    }
                                     <li><a href="/services">Facilities and Services</a></li>
                                 </ul>
                             </li>

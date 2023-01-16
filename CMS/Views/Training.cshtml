@@ -4,9 +4,10 @@
     Layout = "InnerPage.cshtml";
     var coordinatorTraining = Model.Root()?.Descendant<CoordinatorTraining>()?.Children.Cast<Training>().ToList();
     var investigatorTraining = Model.Root()?.Descendant<InvestigatorTraining>()?.Children.Cast<Training>().ToList();
+    var banner = Model.Root().Descendant<InnerBanner>();
 }
 <!-- Page Title -->
-<section class="page-title centred" style="background-image: url(../../assets/images/background/page-title.jpg);">
+<section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">
     <div class="auto-container">
         <div class="content-box">
             <div class="shape"></div>

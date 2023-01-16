@@ -2,10 +2,11 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
 	Layout = "InnerPage.cshtml";
+    var banner = Model.Root().Descendant<InnerBanner>();
     var investigatorTraining = Model.Root()?.Descendant<InvestigatorTraining>()?.Children.Cast<Training>().ToList();
 }
 <!-- Page Title -->
-<section class="page-title centred" style="background-image: url(../../assets/images/background/page-title.jpg);">
+<section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">
     <div class="auto-container">
         <div class="content-box">
             <div class="shape"></div>

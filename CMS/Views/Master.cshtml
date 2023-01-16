@@ -1,7 +1,8 @@
-﻿@using ContentModels= Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = null;
+    var resources = Model.Root().Descendants<Resource>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +37,11 @@
 <body>
 
     <div class="boxed_wrapper">
+
         @Html.Partial("~/Views/Partials/_Preloader.cshtml")
-        @Html.Partial("~/Views/Partials/_Navigation.cshtml")
+        @Html.Partial("~/Views/Partials/_Navigation.cshtml",resources)
         @RenderBody()
-        
+
         <!-- cta-style-two end -->
         @Html.Partial("~/Views/Partials/_Footer.cshtml")
     </div>

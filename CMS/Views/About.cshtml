@@ -4,11 +4,12 @@
     Layout = "InnerPage.cshtml";
     var about = Model.Root().Descendant<About>();
     var services = Model.Root().Descendants<FacilityService>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate).ToList();
+    var banner = Model.Root().Descendant<InnerBanner>();
     int counter = 1;
     var images = @about.Image.ToList();
 }
 <!-- Page Title -->
-<section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+<section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">
     <div class="auto-container">
         <div class="content-box">
             <div class="shape"></div>

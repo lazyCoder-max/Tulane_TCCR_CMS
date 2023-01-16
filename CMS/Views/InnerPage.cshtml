@@ -2,6 +2,7 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = null;
+    var resources = Model.Root().Descendants<Resource>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +10,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta content="Tulane Center for Clinical Research" name="description">
+    <meta content="Clinic, Research" name="keywords">
+    <meta content="Tulane University" name="keywords">
+    <meta content="Clinical Research" name="keywords">
 
-    <title>Laborex - HTML 5 Template Preview</title>
+    <title>Tulane</title>
 
     <!-- Fav Icon -->
     <link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">
@@ -36,46 +41,14 @@
 <!-- page wrapper -->
 <body>
 
-    <div class="boxed_wrapper team-page">
+    <div class="boxed_wrapper">
 
 
         <!-- preloader -->
-        <div class="loader-wrap">
-            <div class="preloader">
-                <div class="preloader-close">Preloader Close</div>
-                <div id="handle-preloader" class="handle-preloader">
-                    <div class="animation-preloader">
-                        <div class="spinner"></div>
-                        <div class="txt-loading">
-                            <span data-text-preloader="l" class="letters-loading">
-                                l
-                            </span>
-                            <span data-text-preloader="a" class="letters-loading">
-                                a
-                            </span>
-                            <span data-text-preloader="b" class="letters-loading">
-                                b
-                            </span>
-                            <span data-text-preloader="o" class="letters-loading">
-                                o
-                            </span>
-                            <span data-text-preloader="r" class="letters-loading">
-                                r
-                            </span>
-                            <span data-text-preloader="e" class="letters-loading">
-                                e
-                            </span>
-                            <span data-text-preloader="x" class="letters-loading">
-                                x
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("~/Views/Partials/_Preloader.cshtml")
         <!-- preloader end -->
         <!-- END sidebar widget item -->
-        @Html.Partial("~/Views/Partials/_Navigation.cshtml")
+        @Html.Partial("~/Views/Partials/_Navigation.cshtml",resources)
         <!-- End Page Title -->
         @RenderBody()
         <!-- cta-style-two -->
