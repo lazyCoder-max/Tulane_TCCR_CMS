@@ -1,6 +1,6 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Staff>>
 @{
-    var teams = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var teams = Model.Where(x => x.IsVisible()).OrderBy(y => y.CreateDate);
 }
 <!-- team-section -->
 <section class="team-section home-5">
