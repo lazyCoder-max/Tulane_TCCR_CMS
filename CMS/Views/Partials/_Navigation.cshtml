@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     var resources = ViewData["resources"].SafeCast<IOrderedEnumerable<Resource>>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var researchs = ViewData["research"].SafeCast<IOrderedEnumerable<Research>>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
     var trainingGroups = ViewData["trainingGroups"].SafeCast<IOrderedEnumerable<TrainingGroup>>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
 }
 <!-- main header -->
@@ -27,25 +28,26 @@
                             <li class="dropdown">
                                 <a href="index.html">Research Center</a>
                                 <ul>
-                                    <li><a href="index.html">COVID Research Trials at TCCR</a></li>
-                                    <li><a href="index-2.html">Seroepidemiology and Immunity of COVID-19 in Southern Louisiana</a></li>
-                                    <li><a href="index-2.html">Janssen Vaccine Trial</a></li>
+                                    @foreach (var research in researchs)
+                                    {
+                                        <li><a href="@research.Url()">@research.Title</a></li>
+                                    }
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="/training">Training</a>
+                                <a href="#">Training</a>
                                 <ul>
                                     @foreach (var group in trainingGroups)
                                     {
                                         <li><a href="@group.Url()">@group.TrainingGroupTitle</a></li>
                                     }
-                                   
+
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#">Resources</a>
                                 <ul>
-                                    @foreach(var resource in resources)
+                                    @foreach (var resource in resources)
                                     {
                                         <li><a href="@resource.Url()">@resource.Name</a></li>
                                     }
@@ -64,7 +66,7 @@
             </div>
             <ul class="menu-right-content clearfix">
                 <li class="btn-box">
-                    <a href="index-4.html" class="theme-btn-one">Volunteer Research</a>
+                    <a href="#" class="theme-btn-one">Volunteer Research</a>
                 </li>
             </ul>
         </div>
@@ -89,7 +91,6 @@
     </div>
 </header>
 <!-- main-header end -->
-
 <!-- Mobile Menu  -->
 <div class="mobile-menu">
     <div class="menu-backdrop"></div>
@@ -101,18 +102,16 @@
         <div class="contact-info">
             <h4>Contact Info</h4>
             <ul>
-                <li>Chicago 12, Melborne City, USA</li>
-                <li><a href="tel:+8801682648101">+88 01682648101</a></li>
-                <li><a href="mailto:info@example.com">info@example.com</a></li>
+                <li>1440 Canal Street, Suit 1700, New Orleans, LA, 70112</li>
+                <li><a href="tel:504-988-0200">504-988-0200</a></li>
+                <li><a href="mailto:tccr@tulane.edu">tccr@tulane.edu</a></li>
             </ul>
         </div>
         <div class="social-links">
             <ul class="clearfix">
-                <li><a href="index.html"><span class="fab fa-twitter"></span></a></li>
-                <li><a href="index.html"><span class="fab fa-facebook-square"></span></a></li>
-                <li><a href="index.html"><span class="fab fa-pinterest-p"></span></a></li>
-                <li><a href="index.html"><span class="fab fa-instagram"></span></a></li>
-                <li><a href="index.html"><span class="fab fa-youtube"></span></a></li>
+                <li><a href="https://twitter.com/TulaneCCR?s=20&t=1v7Srb8G0iSyDN15wM7qXQ"><span class="fab fa-twitter"></span></a></li>
+                <li><a href="https://www.facebook.com/tulaneresearch"><span class="fab fa-facebook-square"></span></a></li>
+                <li><a href="https://www.instagram.com/tulaneccr/"><span class="fab fa-instagram"></span></a></li>
             </ul>
         </div>
     </nav>

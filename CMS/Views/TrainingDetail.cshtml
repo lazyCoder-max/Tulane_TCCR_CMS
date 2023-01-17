@@ -57,7 +57,10 @@
                             <div class="shape-1" style="background-image: url(../../../assets/images/shape/shape-5.png);"></div>
                             <div class="shape-2" style="background-image: url(../../../assets/images/shape/shape-2.png);"></div>
                         </div>
-                        <figure class="image"><img src="@training.Image.Url()" alt=""></figure>
+                        @if(training.Image!=null)
+                        {
+                            <figure class="image"><img src="@training.Image.Url()" alt=""></figure>
+                        }
                         <div class="text">
                             <h2>@training.StartDateAndTime.Day </h2>
                             <h5>@training.StartDateAndTime.ToString("MMM")</h5>

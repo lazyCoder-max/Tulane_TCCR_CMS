@@ -13,7 +13,7 @@
         </div>
         <div class="auto-container">
             <div class="sec-title centred">
-                <h6>Wesal Services</h6>
+                <h6>Our Services</h6>
             </div>
             <div class="row clearfix">
                 @foreach (var service in services.Where(x => x.IsVisible()).Take(10))
@@ -33,15 +33,15 @@
                         </div>
                     </div>
                 }
-                
+
             </div>
         </div>
-        
+
     </section>
     <div class="d-flex justify-content-center">
         <a href="@services.Single().Parent.Url()" class="theme-btn-one mx-auto">Discover More</a>
     </div>
-   <br />
+    <br />
     <!-- service-section end -->
 }
 

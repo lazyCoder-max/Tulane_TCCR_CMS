@@ -3,9 +3,11 @@
 @{
     Layout = null;
     var resources = Model.Root().Descendants<Resource>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var researchs = Model.Root().Descendants<Research>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
     var trainingGroups = Model.Root().Descendants<TrainingGroup>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
     ViewData.Add("resources", resources);
     ViewData.Add("trainingGroups", trainingGroups);
+    ViewData.Add("research", researchs);
 }
 <!DOCTYPE html>
 <html lang="en">

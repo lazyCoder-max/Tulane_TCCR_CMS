@@ -1,5 +1,49 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "InnerPage.cshtml";
+    Layout = "InnerPage.cshtml";
+    var banner = Model.Root().Descendant<InnerBanner>();
+    var research = Model as SubResearch;
 }
+<!-- Page Title -->
+<section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">
+    <div class="auto-container">
+        <div class="content-box">
+            <div class="shape"></div>
+            <div class="title">
+                <h1>Research Center</h1>
+            </div>
+            <ul class="bread-crumb clearfix">
+                <li><a href="index.html">Home</a></li>
+                <li>Research Center</li>
+                <li>@research.Name</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- about-section -->
+<!-- event-details -->
+<section class="event-details sec-pad-2">
+    <div class="pattern-layer" style="background-image: url(../../../assets/images/shape/shape-67.png);"></div>
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-9 col-md-12 col-sm-12 content-side">
+                <div class="event-details-content">
+                    <div class="content-one">
+                        @if (research.Image != null)
+                        {
+                            <figure class="image"><img src="@research.Image.Url()" alt=""></figure>
+                        }
+
+                        <div class="text">
+                            <h3>@research.Title</h3>
+                            <p class="black-text">@research.ShortDescription</p>
+                            <p>@research.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- event-details end -->
