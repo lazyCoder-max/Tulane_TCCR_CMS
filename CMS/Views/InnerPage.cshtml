@@ -3,6 +3,9 @@
 @{
     Layout = null;
     var resources = Model.Root().Descendants<Resource>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var trainingGroups = Model.Root().Descendants<TrainingGroup>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    ViewData.Add("resources", resources);
+    ViewData.Add("trainingGroups", trainingGroups);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +51,7 @@
         @Html.Partial("~/Views/Partials/_Preloader.cshtml")
         <!-- preloader end -->
         <!-- END sidebar widget item -->
-        @Html.Partial("~/Views/Partials/_Navigation.cshtml",resources)
+        @Html.Partial("~/Views/Partials/_Navigation.cshtml",ViewData)
         <!-- End Page Title -->
         @RenderBody()
         <!-- cta-style-two -->
@@ -60,10 +63,8 @@
             <div class="auto-container">
                 <div class="inner-box clearfix">
                     <div class="text pull-left">
-                        <h2>Accurate Product Testing <br />by Expert Scientists</h2>
                     </div>
                     <div class="btn-box pull-right">
-                        <a href="index-4.html" class="theme-btn-one">Book Free Sampling Here</a>
                     </div>
                 </div>
             </div>

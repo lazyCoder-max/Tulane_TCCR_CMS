@@ -2,9 +2,9 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
     Layout = "InnerPage.cshtml";
-    var service = Model.Root().Descendant<Service>();
+    var service = Model as Service;
     var serviceImages = service.Image.ToList();
-    var banner = Model.Root().Descendant<InnerBanner>();
+    var banner = service.Root().Descendant<InnerBanner>();
 }
 <!-- Page Title -->
 <section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">

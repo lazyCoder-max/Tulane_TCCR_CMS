@@ -3,6 +3,9 @@
 @{
     Layout = null;
     var resources = Model.Root().Descendants<Resource>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var trainingGroups = Model.Root().Descendants<TrainingGroup>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    ViewData.Add("resources", resources);
+    ViewData.Add("trainingGroups", trainingGroups);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -38,8 +41,7 @@
 
     <div class="boxed_wrapper">
 
-        @Html.Partial("~/Views/Partials/_Preloader.cshtml")
-        @Html.Partial("~/Views/Partials/_Navigation.cshtml",resources)
+        @Html.Partial("~/Views/Partials/_Navigation.cshtml" ,ViewData)
         @RenderBody()
 
         <!-- cta-style-two end -->

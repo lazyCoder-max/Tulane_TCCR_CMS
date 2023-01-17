@@ -13,7 +13,7 @@
         </div>
         <div class="auto-container">
             <div class="sec-title centred">
-                <h6>ARO Services</h6>
+                <h6>Wesal Services</h6>
             </div>
             <div class="row clearfix">
                 @foreach (var service in services.Where(x => x.IsVisible()).Take(10))
@@ -26,7 +26,7 @@
                                 <p>@service.ShortDescription</p>
                                 @if (service.Description.ToString().Length >= 1)
                                 {
-                                    <div class="btn-box"><a href="@service.Parent.Url()" class="theme-btn-two">Read More</a></div>
+                                    <div class="btn-box"><a href="@service.Url()" class="theme-btn-two">Read More</a></div>
                                 }
 
                             </div>

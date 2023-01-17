@@ -3,7 +3,7 @@
 @{
     Layout = "InnerPage.cshtml";
     var banner = Model.Root().Descendant<InnerBanner>();
-    var resource = Model.Root().Descendant<Resource>();
+    var resource = Model as Resource;
 }
 <!-- Page Title -->
 <section class="page-title centred" style="background-image: url(@banner?.BackgroundImage?.Url());">
@@ -16,6 +16,7 @@
             <ul class="bread-crumb clearfix">
                 <li><a href="index.html">Home</a></li>
                 <li>Resources</li>
+                <li>@resource.Title</li>
             </ul>
         </div>
     </div>
@@ -29,11 +30,11 @@
             <div class="col-lg-9 col-md-12 col-sm-12 content-side">
                 <div class="event-details-content">
                     <div class="content-one">
-                        <figure class="image"><img src="../../assets/images/event/event-7.jpg" alt=""></figure>
+                        <figure class="image"><img src="@resource.Image.Url()" alt=""></figure>
                         <div class="text">
                             <h3>@resource.Title</h3>
                             <p class="black-text">@resource.ShortDescription</p>
-                            <pre>@resource.Description</pre>
+                            <p>@resource.Description</p>
                         </div>
                     </div>
                 </div>
@@ -45,13 +46,17 @@
                             <div class="expand navbar-collapse show clearfix">
                                 <ul class="navigation clearfix">
                                     <li class="dropdown">
-                                        <a href="#">@resource.Name Resources</a>
-                                        <ul>
-                                            @foreach (var subresource in resource.Children.Cast<SubResource>().ToList())
-                                            {
-                                                <li><a href="@subresource.Url()">@subresource.Name</a></li>
-                                            }
-                                        </ul>
+                                        @if (resource.Children.Cast<SubResource>().Count()>=1)
+                                        {
+                                            <a href="#">@resource.Name Resources</a>
+                                            <ul>
+                                                @foreach (var subresource in resource.Children.Cast<SubResource>().ToList())
+                                                {
+                                                    <li><a href="@subresource.Url()">@subresource.Name</a></li>
+                                                }
+                                            </ul>
+                                        }
+                                        
                                     </li>
                                 </ul>
                             </div>

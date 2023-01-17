@@ -1,6 +1,7 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Resource>>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    var resources = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var resources = ViewData["resources"].SafeCast<IOrderedEnumerable<Resource>>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+    var trainingGroups = ViewData["trainingGroups"].SafeCast<IOrderedEnumerable<TrainingGroup>>().Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
 }
 <!-- main header -->
 <header class="main-header style-four style-five">
@@ -35,8 +36,11 @@
                             <li class="dropdown">
                                 <a href="/training">Training</a>
                                 <ul>
-                                    <li><a href="/training/coordinators-training">Upcoming Coordinator Training</a></li>
-                                    <li><a href="/training/investigators-training">Upcoming Investigator Trainings</a></li>
+                                    @foreach (var group in trainingGroups)
+                                    {
+                                        <li><a href="@group.Url()">@group.TrainingGroupTitle</a></li>
+                                    }
+                                   
                                 </ul>
                             </li>
                             <li class="dropdown">

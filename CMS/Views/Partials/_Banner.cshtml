@@ -1,4 +1,7 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<Banner>>
+@{
+    var banners = Model.Where(x => x.IsVisible()).OrderByDescending(y => y.CreateDate);
+}
 <!-- banner-section -->
 <section class="banner-section style-four style-five">
     <div class="pattern-layer">
@@ -8,62 +11,53 @@
         <div class="pattern-4" style="background-image: url(../../assets/images/shape/shape-68.png);"></div>
     </div>
     <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
-        <div class="slide-item">
-            <div class="auto-container">
-                <div class="row align-items-center clearfix">
-                    <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                        <div class="content-box">
-                            <h2>ARO will help you select the best approach to achieve your study goals.</h2>
-                            <div class="btn-box">
-                                <a href="index-4.html" class="banner-btn">Discover</a>
+        @foreach (var banner in banners)
+        {
+            <div class="slide-item">
+                <div class="auto-container">
+                    <div class="row align-items-center clearfix">
+                        <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                            <div class="content-box">
+                                <h2>@banner.ShortDescription </h2>
+                                <p></p>
+                                <div class="btn-box">
+                                    @if(banner.RedirectButtonStyle.Length>=1)
+                                    {
+                                        switch(banner.RedirectButtonStyle)
+                                        {
+                                            case "1":
+                                                <a href="@banner.RedirectLink" class="theme-btn-one">@banner.RedirectButtonName</a>
+                                                break;
+                                            case "2":
+                                                <a href="@banner.RedirectLink" class="theme-btn-two">@banner.RedirectButtonName</a>
+                                                break;
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                        <div class="image-box">
-                            <div class="shape">
-                                <div class="shape-3" style="background-image: url(../../assets/images/shape/shape-52.png);"></div>
-                                <div class="shape-4" style="background-image: url(../../assets/images/shape/shape-52.png);"></div>
-                            </div>
-                            <figure class="image"><img src="../../assets/images/banner/banner-img-1.jpg" alt=""></figure>
-                            <div class="admin-box">
-                                <figure class="admin-thumb"><img src="../../assets/images/banner/admin-1.png" alt=""></figure>
-                                <h4>600+ Different Tests</h4>
-                                <p>Experienced professionals</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slide-item">
-            <div class="auto-container">
-                <div class="row align-items-center clearfix">
-                    <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                        <div class="content-box">
-                            <h2>ARO services include a wide set of solutions tailored exactly to your needs. </h2>
-                            <div class="btn-box">
-                                <a href="research.html" class="theme-btn-one">ARO Services</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                        <div class="image-box">
-                            <div class="shape">
-                                <div class="shape-3" style="background-image: url(assets/images/shape/shape-52.png);"></div>
-                                <div class="shape-4" style="background-image: url(assets/images/shape/shape-52.png);"></div>
-                            </div>
-                            <figure class="image"><img src="assets/images/banner/banner-img-2.jpg" alt=""></figure>
-                            <div class="admin-box">
-                                <figure class="admin-thumb"><img src="assets/images/banner/admin-1.png" alt=""></figure>
-                                <h4>600+ Different Tests</h4>
-                                <p>Experienced professionals</p>
+                        <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                            <div class="image-box">
+                                <div class="shape">
+                                    <div class="shape-3" style="background-image: url(assets/images/shape/shape-52.png);"></div>
+                                    <div class="shape-4" style="background-image: url(assets/images/shape/shape-52.png);"></div>
+                                </div>
+                               @if(banner.BannerImage!=null)
+                                {
+                                    <figure class="image"><img src="@banner.BannerImage.Url()" alt=""></figure>
+                                }
+                                else
+                                {
+                                     <figure class="image"><img src="assets/images/banner/banner-img-2.jpg" alt=""></figure>                                    
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        
+        
     </div>
 </section>
 <!-- banner-section end -->
